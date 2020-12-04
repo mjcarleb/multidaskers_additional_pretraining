@@ -1,3 +1,9 @@
+# create environment
+$conda env create -f pretrain_tf.yml
+
+# activate new env
+$conda activate pretrain_tf
+
 # convert domain specific .txt into train/val for additional MLM pretraining
 $python3 codes/further-pre-training/create_pretraining_data.py --input_file=../../pt_medium.txt  \
                         --output_file=../../tmp/pt_medium.tfrecord  --vocab_file=../../uncased_L-12_H-768_A-12/vocab.txt \
