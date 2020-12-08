@@ -1,5 +1,0 @@
-tensorflow==1.15
-spacy
-pandas
-numpy
-torch
