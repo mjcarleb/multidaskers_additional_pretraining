@@ -13,6 +13,7 @@ RUN conda env create -f pretrain_tf.yml
 RUN conda init
 RUN /bin/bash -c activate pretrain_tf.yml
 
+COPY codes codes/
 COPY run_scripts.sh .
 RUN mkdir tmp
 RUN mkdir models
