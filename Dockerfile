@@ -1,18 +1,19 @@
 FROM nvidia/cuda:10.2-base
-FROM python:3.7
+#FROM python:3.7
+FROM continuumio/anaconda3
 
 WORKDIR /app
 
 # Copy the following from local drive
-COPY requirements.txt .
+COPY pretrain_tf.yml .
 
 # Need to download and install packages
-RUN pip3 install -r requirements.txt
+#RUN pip install conda
+RUN conda env create -f pretrain_tf.yml
+RUN conda init
+RUN /bin/bash -c activate pretrain_tf.yml
 
-COPY codes codes/
-COPY pt_medium.txt .
 COPY run_scripts.sh .
-
 RUN mkdir tmp
 RUN mkdir models
 
