@@ -13,6 +13,7 @@ curl --output uncased_L-12_H-767_A-12.zip https://storage.googleapis.com/bert_mo
 unzip uncased_L-12_H-767_A-12.zip
 
 # convert domain specific .txt into train/val for additional MLM pretraining
+# takes 5-10 minutes probably to run
 python3 codes/further-pre-training/create_pretraining_data.py --input_file=pt_medium.txt \
                        --output_file=tmp/pt_medium.tfrecord \
                        --vocab_file=uncased_L-12_H-768_A-12/vocab.txt \
@@ -21,6 +22,7 @@ python3 codes/further-pre-training/create_pretraining_data.py --input_file=pt_me
                        --random_seed=12345 --dupe_factor=5
 
 # perform additional domain specific MLM pretraining
+# with GPU, it takes approximate 1 sec / step (3,000-4,000 steps per hour...10,000 steps = 3-4 hours)
 python3 codes/further-pre-training/run_pretraining.py --input_file=tmp/pt_medium.tfrecord  \
                          --output_dir=uncased_L-12_H-768_A-12_pt_medium_pretrain --do_train=True   \
                          --do_eval=False --bert_config_file=uncased_L-12_H-768_A-12/bert_config.json   \
@@ -30,6 +32,7 @@ python3 codes/further-pre-training/run_pretraining.py --input_file=tmp/pt_medium
                          --learning_rate=5e-5
 
 # convert tf model (with additionally pretrained weights) to pytorch
+# runs in < 1 minute
 python3 codes/fine-tuning/convert_tf_checkpoint_to_pytorch.py \
                     --tf_checkpoint_path=uncased_L-12_H-768_A-12_pt_medium_pretrain/model.ckpt-20   \
                     --bert_config_file=uncased_L-12_H-768_A-12/bert_config.json   \
