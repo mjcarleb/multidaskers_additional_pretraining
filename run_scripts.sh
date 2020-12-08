@@ -1,10 +1,7 @@
 #! /bin/bash
 
-# create environment
-#$conda env create --file=pretrain_tf.yml
-
 # activate environment
-#$conda activate pretrain_tf
+pip install curl
 
 # get bert base uncased
 curl --output uncased_L-12_H-767_A-12.zip https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip
