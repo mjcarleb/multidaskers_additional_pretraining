@@ -16,3 +16,6 @@ RUN mkdir models
 
 # Run our python script/application in the Docker container.
 CMD conda run -n pretrain_tf ./run_scripts.sh 
+
+# to build:  $docker image build -t name:latest .
+# to run:  $docker run -it --mount src="$(pwd)",target=/app/models,type=bind pretrained:latest
