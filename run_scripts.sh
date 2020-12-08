@@ -36,6 +36,6 @@ python3 codes/further-pre-training/run_pretraining.py --input_file=tmp/pt_medium
 python3 codes/fine-tuning/convert_tf_checkpoint_to_pytorch.py \
                     --tf_checkpoint_path=uncased_L-12_H-768_A-12_pt_medium_pretrain/model.ckpt-20   \
                     --bert_config_file=uncased_L-12_H-768_A-12/bert_config.json   \
-                    --pytorch_dump_path ./models/pytorch_model.bin
+                    --pytorch_dump_path /app/models/pytorch_model.bin
 
 # upload the final pytorch model to gcp

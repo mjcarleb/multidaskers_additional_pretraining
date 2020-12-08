@@ -1,4 +1,6 @@
-  
+#  mjc:   docker run -it --mount src="$(pwd)"/uncased_L-12_H-768-A-12,target=/app/models,type=bind pretrain:latest sh
+
+
 conda create -n tf python=3.7
 conda activate tf
 pip install tensorflow==1.15
