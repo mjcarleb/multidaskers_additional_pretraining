@@ -1,13 +1,11 @@
 FROM nvidia/cuda:10.2-base
-FROM python:3.7
+FROM continuumio/miniconda3
 
 WORKDIR /app
 
 # Copy the following from local drive
-COPY requirements.txt .
-
-# Need to download and install packages
-RUN pip3 install -r requirements.txt
+COPY pretrain_tf.yml .
+RUN conda env create -f pretrain_tf.yml python=3.7
 
 COPY codes codes/
 COPY pt_medium.txt .
@@ -17,4 +15,4 @@ RUN mkdir tmp
 RUN mkdir models
 
 # Run our python script/application in the Docker container.
-CMD ./run_scripts.sh
+CMD conda run -n pretrain_tf ./run_scripts.sh 

@@ -1,5 +1,6 @@
 #  mjc:   docker run -it --mount src="$(pwd)"/uncased_L-12_H-768_A-12,target=/app/models,type=bind pretrained:latest sh
 
+# docker run -it --gpus all --mount src="$(pwd)",target=/app/models,type=bind pretrained:latest
 
 conda create -n tf python=3.7
 conda activate tf
